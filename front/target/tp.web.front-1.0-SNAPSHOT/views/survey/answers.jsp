@@ -1,4 +1,5 @@
 <%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -39,6 +40,20 @@
                        tabAnswers[i] = $(allAnswers).get(i).value;
                    }
                     console.log(tabAnswers[i]);
+               }
+               if(tabAnswers.length != 0 ){
+                   var url = window.location.search;
+
+                   var id = url.substring(url.lastIndexOf("=")+1);
+                   $.ajax({
+                       method: "POST",
+                       url: "/survey/home/addAnswer",
+                       data: { id: id , answers: tabAnswers },
+                       async :false
+                   })
+                       .done(function( msg ) {
+                           alert( "Data Saved: " + msg );
+                       });
                }
             });
         });
@@ -90,14 +105,24 @@
                       role="form">
                     <h2>Add answers to  : ${survey.question}</h2>
                     <div id="allAnswers">
-                    <div id="" class="form-group">
-                        <div class="col-sm-9">
-                            <%-- <!--  <label th:th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-                                      class="validation-message"></label>-->--%>
-                            <input type="text" name="response"  placeholder="Response"
-                                   class="form-control" />
+                        <c:forEach items="${survey.responses}" var="response">
+                            <div id="" class="form-group">
+                                <div class="col-sm-9">
+                                        <%-- <!--  <label th:th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                                  class="validation-message"></label>-->--%>
+                                    <input type="text" name="response"  placeholder="Response"
+                                           class="form-control" value="${response.answer}" />
+                                </div>
+                            </div>
+                        </c:forEach>
+                        <div id="" class="form-group">
+                            <div class="col-sm-9">
+                                <%-- <!--  <label th:th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                          class="validation-message"></label>-->--%>
+                                <input type="text" name="response"  placeholder="Response"
+                                       class="form-control"  />
+                            </div>
                         </div>
-                    </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-9">

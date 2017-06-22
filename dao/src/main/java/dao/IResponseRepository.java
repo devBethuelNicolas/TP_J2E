@@ -13,6 +13,8 @@ public interface IResponseRepository extends CrudRepository<Response, Integer> {
     Response findResponseById(int id );
     Response save (Response response);
     Response findOne(Integer integer);
+    Response findByAnswer(String answer);
+
     void delete(Response response);
 
 }

@@ -33,5 +33,9 @@ public class ResponseService implements IResponseService {
     }
     public Response findOne(int id ) { return responseRepository.findOne(id);}
     public void delete(Response response ){responseRepository.delete(response);};
+    public Response findByAnswer(String answer) {
+        return responseRepository.findByAnswer(answer);
+    }
+
 
 }

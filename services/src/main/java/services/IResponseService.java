@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface IResponseService {
     public void save(Response response);
+    public Response findByAnswer(String answer);
 
     public List<Response> findAllResponse();
 

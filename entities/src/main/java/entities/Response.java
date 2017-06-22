@@ -37,8 +37,8 @@ public class Response {
         this.answer = answer;
     }
 
-   /*@ManyToOne(targetEntity = Survey.class)
-    @Column(name="survey_id")
+    @OneToOne(targetEntity = Survey.class)
+   @JoinColumn(name = "survey_id")
     private Survey survey;
     public Survey getSurvey() {
         return survey;
@@ -46,5 +46,5 @@ public class Response {
 
     public void setSurvey(Survey survey) {
         this.survey = survey;
-    }*/
+    }
 }

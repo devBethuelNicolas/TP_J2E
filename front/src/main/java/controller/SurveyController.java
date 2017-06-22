@@ -120,14 +120,23 @@ public class SurveyController  {
         Users userConnected = userService.findByName(auth.getName());
         ModelAndView modelAndView = new ModelAndView();
         Set<Response> responses = new HashSet<>();
-        for(String answer : answers) {
-            Response response = new Response();
-            response.setAnswer(answer);
-            responses.add(response);
-        }
         Survey survey = surveyService.findOne(id);
-        survey.setResponses(responses);
-        surveyService.save(survey);
+        for(String answer : answers) {
+            if(responseService.findByAnswer(answer) == null) {
+                Response response = new Response();
+                response.setAnswer(answer);
+                response.setSurvey(survey);
+                responses.add(response);
+                responseService.save(response);
+            }else {
+                Response response = responseService.findByAnswer(answer);
+                response.setSurvey(survey);
+                responses.add(response);
+                responseService.save(response);
+            }
+
+
+        }
 
         modelAndView.setViewName("/survey/home");
         return modelAndView;
