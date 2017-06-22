@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="tp.web.front:war">
+    <output-path>$PROJECT_DIR$/front/target</output-path>
+    <root id="archive" name="tp.web.front-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="tp.web.front:war exploded" />
+    </root>
+  </artifact>
+</component>
